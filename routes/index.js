@@ -6,7 +6,9 @@ const Notes          = require('../models/notes');
 //user routes
 
 routes.get('/users/:id', (req, res) => {
-    Notes.find({ user: req.params.id, isDeleted: false }).then((notes) => {
+    Notes.find({ user: req.params.id, isDeleted: false })
+    .sort({createdAt: 'desc'})
+    .then((notes) => {
         if(notes) {
             res.status(200).json({
                 success: true,
